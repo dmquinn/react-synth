@@ -24,14 +24,11 @@ function GenerateGrid() {
 const CHOSEN_OCTAVE = "3";
 
 export default function App() {
-	// A nested array of objects is not performant, but is easier to understand
-	// performance is not an issue at this stage anyway
+	
 	const [grid, setGrid] = useState(GenerateGrid());
 
-	// Boolean to handle if music is played or not
 	const [isPlaying, setIsPlaying] = useState(false);
 
-	// Used to visualize which column is making sound
 	const [currentColumn, setCurrentColumn] = useState(null);
 
 	//Notice the new PolySynth in use here, to support multiple notes at once
@@ -138,7 +135,11 @@ export default function App() {
 				))}
 			</div>
 			<button className="play-button" onClick={() => PlayMusic()}>
-				{isPlaying ? "Stop" : "Play"}
+				{isPlaying ? (
+					<i class="fas fa-pause"></i>
+				) : (
+					<i class="fas fa-play"></i>
+				)}
 			</button>
 		</div>
 	);
@@ -146,9 +147,5 @@ export default function App() {
 
 const NoteButton = ({ note, isActive, ...rest }) => {
 	const classes = isActive ? "note note--active" : "note";
-	return (
-		<button className={classes} {...rest}>
-			{note}
-		</button>
-	);
+	return <button className={classes} {...rest}></button>;
 };
